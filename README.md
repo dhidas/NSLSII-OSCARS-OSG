@@ -1,6 +1,6 @@
 # NSLSII-OSCARS-OSG
 
-This repository is for Open Science Grid configuration files and OSCARS python scripts for calculating spectra, flux, etc using OSG.
+This repository is for Open Science Grid configuration files and OSCARS python scripts for calculating spectra, flux, etc using OSG.  These are the scripts that I use for calculations.  They are provided as examples and one should know that modification for their use is required.  Paths, data files, beamlines, etc must be customized for your own use case.  The instructions below are largely reminders to myself, but can serve as a guide for your own use.
 
 These scripts require an accompanying directory containing magnetic measurement data for a given beamline:
 NSLSII-MM-Data
@@ -35,5 +35,4 @@ condor_submit NSLSII-OSCARS-OSG/LIX/osg_submit.condor
 
 # You must make sure the paths to data files is correct!!
 ```
-
 
