@@ -8,7 +8,7 @@ osr.set_nthreads_global(8)
 osr.set_particle_beam(beam='NSLSII-LongStraight', name='beam', x0=[0, 0, -1.5])
 osr.set_ctstartstop(0, 3)
 
-file_list = read_file_list('/Users/dhidas/Desktop/IVU 2,8m A13004/Final Scans_4,16,15/FieldC/List_LIX.txt')
+file_list = read_file_list('NSLSII-MM-Data/LIX/file_list.txt')
 
 for gap in np.linspace(5.1, 40.0, 20):
     osr.clear_bfields()

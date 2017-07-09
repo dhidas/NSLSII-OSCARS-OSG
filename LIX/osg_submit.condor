@@ -25,7 +25,7 @@ request_memory = 1 GB
 
 # EXECUTABLE is the program your job will run It's often useful
 # to create a shell script to "wrap" your actual work.
-Executable = NSLSII/LIX/osg_run_Spectrum.sh
+Executable = NSLSII-OSCARS-OSG/LIX/osg_run_Spectrum.sh
 Arguments = $(NAME) $(GAP) $(Process)
 
 # ERROR and OUTPUT are the error and output channels from your job

@@ -30,7 +30,7 @@ osr.set_particle_beam(beam='NSLSII-LongStraight', name='beam', x0=[0, 0, -1.5])
 osr.set_ctstartstop(0, 3)
 
 # Input file list
-file_list = read_file_list('NSLSII/data/LIX/file_list.txt')
+file_list = read_file_list('NSLSII-MM-Data/LIX/file_list.txt')
 
 # Add bfield for this gap according to the file list
 osr.clear_bfields()

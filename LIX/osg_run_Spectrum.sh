@@ -14,4 +14,4 @@ tar zxf LIX_osg.tgz
 module load gcc/4.9.2
 module load python/3.5.2
 
-python3 NSLSII/LIX/Spectrum_OSG.py $NAME $GAP $Process
+python3 NSLSII-OSCARS-OSG/LIX/Spectrum_OSG.py $NAME $GAP $Process
