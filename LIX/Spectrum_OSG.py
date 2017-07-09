@@ -47,11 +47,11 @@ particles_per_node = 1000
 # Observation point for spectrum
 observation_point = [0, 0, 30]
 
-# Number of points in the spectrum
-npoints = int((20000-100)/2.)
-
 # Energy range for spectrum
 range_eV = [100, 20000]
+
+# Number of points in the spectrum
+npoints = int((range_eV[1]-range_eV[0])/2.)
 
 # Ideal single-particle data 
 if int(Process) == 0:
