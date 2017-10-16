@@ -45,7 +45,7 @@ else:
     osr.calculate_spectrum(
         obs=[0, 0, 17-1.250],
         energy_range_eV=[10, 10000],
-        nparticles=3,
+        nparticles=5000,
         ofile=out_file_name
     )
 
