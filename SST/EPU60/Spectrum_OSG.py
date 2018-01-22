@@ -80,7 +80,7 @@ if int(Process) == 0:
         obs=[0, 0, OBS],
         energy_range_eV=[ESTART, ESTOP],
         polarization='linear-horizontal',
-        ofile=out_name+'_LH.txt',
+        bofile=out_name+'_LH.dat',
     )
 
     osr.set_new_particle(particle='ideal')
@@ -88,7 +88,7 @@ if int(Process) == 0:
         obs=[0, 0, OBS],
         energy_range_eV=[ESTART, ESTOP],
         polarization='linear-vertical',
-        ofile=out_name+'_LV.txt',
+        bofile=out_name+'_LV.dat',
     )
 
 
@@ -98,7 +98,7 @@ else:
         energy_range_eV=[ESTART, ESTOP],
         polarization='linear-horizontal',
         nparticles=NPARTICLES,
-        ofile=out_name+'_LH.txt',
+        bofile=out_name+'_LH.dat',
     )
 
     osr.calculate_spectrum(
@@ -106,7 +106,7 @@ else:
         energy_range_eV=[ESTART, ESTOP],
         polarization='linear-vertical',
         nparticles=NPARTICLES,
-        ofile=out_name+'_LV.txt',
+        bofile=out_name+'_LV.dat',
     )
 
 
