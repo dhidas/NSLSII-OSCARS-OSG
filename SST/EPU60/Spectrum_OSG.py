@@ -1,5 +1,7 @@
 # This is meant to be run on OSG or similar condor-type systems
 
+print('Python has started')
+
 # Command line arguments are given by condor at runtime
 import sys
 sys.path.append('.')
@@ -8,7 +10,8 @@ sys.path.append('.')
 import oscars.sr
 from oscars.util import *
 from oscars.fit import *
-from oscars.plots_mpl import *
+
+from math import sqrt
 
 # Get process number and gap from input
 NAME = sys.argv[1]
@@ -30,16 +33,16 @@ ESTART = 10
 ESTOP = 2600
 
 # Number of particles each node for multi-particle simulations
-NPARTICLES = 50
+NPARTICLES = 1000
 
 # Setting 1 thread and no GPU for OSG
-osr = oscars.sr.sr(gpu=0, nthreads=10)
+osr = oscars.sr.sr(gpu=0, nthreads=1)
 
 osr.set_particle_beam(beam='NSLSII-ShortStraight', x0=[0, 0, IDOFFSET - 1.6/2])
 osr.set_ctstartstop(0, 1.6)
 
 
-file_list = read_file_list2('/Users/dhidas/OSCARS-dev/NSLSII-MM-Data/SST/EPU60/'+MODE+'/file_list.txt', gap=GAP, phase_mode=MODE)
+file_list = read_file_list2('NSLSII-MM-Data/SST/EPU60/'+MODE+'/file_list.txt', gap=GAP, phase_mode=MODE)
 
 
 osr.add_bfield_interpolated(
@@ -51,17 +54,17 @@ osr.add_bfield_interpolated(
 )
 
 # Trajectory correction
-False and correct_trajectory(osr, position=[0, 0, IDOFFSET + 1.6/2], beta=[0, 0, 1],
+correct_trajectory(osr, position=[0, 0, IDOFFSET + 1.6/2], beta=[0, 0, 1],
                    bfields=[[[0, 0.5, 0], [0, 0, 0.15], [0, 0, IDOFFSET - 0.7], 'kick_entry_x'],
                             [[0.5, 0, 0], [0, 0, 0.15], [0, 0, IDOFFSET - 0.7], 'kick_entry_y'],
                             [[0, 0.5, 0], [0, 0, 0.15], [0, 0, IDOFFSET + 0.7], 'kick_exit_x'],
                             [[0.5, 0, 0], [0, 0, 0.15], [0, 0, IDOFFSET + 0.7], 'kick_exit_y']
                            ],
                   tol=1e-16)
-osr.print_all()
+#osr.print_all()
 
 osr.set_new_particle(particle='ideal')
-trajectory_ideal = osr.calculate_trajectory()
+trajectory_ideal = osr.calculate_trajectory(bofile=out_name+'_TJ.dat', oformat='t x y z bx by bz')
 
 
 # Trajectory tests
