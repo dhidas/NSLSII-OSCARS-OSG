@@ -2,7 +2,8 @@
 
 NAME=$1
 GAP=$2
-Process=$3
+Cluster=$3
+Process=$4
 
 echo $PWD
 
@@ -16,3 +17,7 @@ module load python/3.5.2
 module load all-pkgs
 
 python3 NSLSII-OSCARS-OSG/SST/U42/Spectrum_OSG.py $NAME $GAP $Process
+
+ls -a
+
+tar zcf ${NAME}_${Cluster}.${Process}.tgz ${NAME}_*

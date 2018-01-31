@@ -1,3 +1,15 @@
+#!/bin/bash
+MYDIR=$PWD
+OUTDIR=$1
+mkdir -pv $OUTDIR/NSLSII-OSCARS-OSG/SST/U42
+
+./NSLSII-OSCARS-OSG/SST/U42/osg_tgz_files.sh
+
+cp SST_U42_osg.tgz $OUTDIR
+cp NSLSII-OSCARS-OSG/SST/U42/osg_run_Spectrum.sh $OUTDIR/NSLSII-OSCARS-OSG/SST/U42/
+cp NSLSII-OSCARS-OSG/SST/U42/osg_submit.condor   $OUTDIR/NSLSII-OSCARS-OSG/SST/U42/
+cd $OUTDIR
+
 condor_submit NSLSII-OSCARS-OSG/SST/U42/osg_submit.condor -append GAP=11.5
 condor_submit NSLSII-OSCARS-OSG/SST/U42/osg_submit.condor -append GAP=12.0
 condor_submit NSLSII-OSCARS-OSG/SST/U42/osg_submit.condor -append GAP=12.5
