@@ -33,25 +33,26 @@ ESTART = 10
 ESTOP = 2600
 
 # Number of particles each node for multi-particle simulations
-NPARTICLES = 1000
+NPARTICLES = 5000
 
 # Setting 1 thread and no GPU for OSG
-osr = oscars.sr.sr(gpu=0, nthreads=1)
+osr = oscars.sr.sr(gpu=0, nthreads=10)
 
 osr.set_particle_beam(beam='NSLSII-ShortStraight', x0=[0, 0, IDOFFSET - 1.6/2])
 osr.set_ctstartstop(0, 1.6)
 
 
-file_list = read_file_list2('NSLSII-MM-Data/SST/EPU60/'+MODE+'/file_list.txt', gap=GAP, phase_mode=MODE)
-
-
-osr.add_bfield_interpolated(
-    file_list,
+fn = read_file_list_interpolate_2d(
+    ifile='NSLSII-MM-Data/SST/EPU60/'+MODE+'/file_list.txt',
     iformat='OSCARS1D Z Bx By Bz',
-    scale=[0.001],
-    parameter=PHASE,
-    translation=[0, 0, IDOFFSET + FIELDOFFSET]
-)
+    phase_mode=MODE,
+    gap=GAP,
+    phase=-PHASE,
+    ofile='test.dat'
+    )
+
+osr.add_bfield_file(ifile=fn, iformat='OSCARS1D Z Bx By Bz', scale=[0.001], translation=[0, 0, IDOFFSET + FIELDOFFSET])
+
 
 # Trajectory correction
 correct_trajectory(osr, position=[0, 0, IDOFFSET + 1.6/2], beta=[0, 0, 1],
