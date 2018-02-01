@@ -12,6 +12,9 @@ from oscars.util import *
 from oscars.fit import *
 
 from math import sqrt
+import time
+
+start_time = time.time()
 
 # Get process number and gap from input
 NAME = sys.argv[1]
@@ -30,7 +33,7 @@ FIELDOFFSET = - 1.05
 IDOFFSET = 1.250
 OBS = 30 + IDOFFSET
 ESTART = 10
-ESTOP = 2600
+ESTOP = 4000
 
 # Number of particles each node for multi-particle simulations
 NPARTICLES = 5000
@@ -185,3 +188,5 @@ else:
         raise ValueError('MODE not recognized: ' + MODE)
 
 
+
+print('calculation time:', time.time() - start_time, '[s]')
