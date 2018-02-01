@@ -80,37 +80,108 @@ print('Angle:', t_angle, 'PASSED' if t_angle < 1e-9 else 'FAILED')
 
 if int(Process) == 0:
     osr.set_new_particle(particle='ideal')
-    osr.calculate_spectrum(
-        obs=[0, 0, OBS],
-        energy_range_eV=[ESTART, ESTOP],
-        polarization='linear-horizontal',
-        bofile=out_name+'_LH.dat',
-    )
+    if MODE.upper().beginswith('ANTIPARALLEL'):
+        osr.calculate_spectrum(
+            obs=[0, 0, OBS],
+            energy_range_eV=[ESTART, ESTOP],
+            polarization='linear-horizontal',
+            bofile=out_name+'_LH.dat',
+        )
 
-    osr.set_new_particle(particle='ideal')
-    osr.calculate_spectrum(
-        obs=[0, 0, OBS],
-        energy_range_eV=[ESTART, ESTOP],
-        polarization='linear-vertical',
-        bofile=out_name+'_LV.dat',
-    )
+        osr.set_new_particle(particle='ideal')
+        osr.calculate_spectrum(
+            obs=[0, 0, OBS],
+            energy_range_eV=[ESTART, ESTOP],
+            polarization='linear-vertical',
+            bofile=out_name+'_LV.dat',
+        )
+    elif MODE.upper().beginswith('PARALLEL'):
+        if abs(PHASE) < 14.0 or abs(PHASE) > 16.0:
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='linear-horizontal',
+                bofile=out_name+'_LH.dat',
+            )
+         
+            osr.set_new_particle(particle='ideal')
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='linear-vertical',
+                bofile=out_name+'_LV.dat',
+            )
+        else:
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='cl',
+                bofile=out_name+'_CL.dat',
+            )
+ 
+            osr.set_new_particle(particle='ideal')
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='cr',
+                bofile=out_name+'_CR.dat',
+            )
+    else:
+        raise ValueError('MODE not recognized: ' + MODE)
+ 
 
 
 else:
-    osr.calculate_spectrum(
-        obs=[0, 0, OBS],
-        energy_range_eV=[ESTART, ESTOP],
-        polarization='linear-horizontal',
-        nparticles=NPARTICLES,
-        bofile=out_name+'_LH.dat',
-    )
-
-    osr.calculate_spectrum(
-        obs=[0, 0, OBS],
-        energy_range_eV=[ESTART, ESTOP],
-        polarization='linear-vertical',
-        nparticles=NPARTICLES,
-        bofile=out_name+'_LV.dat',
-    )
+    if MODE.upper().beginswith('ANTIPARALLEL'):
+        osr.calculate_spectrum(
+            obs=[0, 0, OBS],
+            energy_range_eV=[ESTART, ESTOP],
+            polarization='linear-horizontal',
+            nparticles=NPARTICLES,
+            bofile=out_name+'_LH.dat',
+        )
+ 
+        osr.calculate_spectrum(
+            obs=[0, 0, OBS],
+            energy_range_eV=[ESTART, ESTOP],
+            polarization='linear-vertical',
+            nparticles=NPARTICLES,
+            bofile=out_name+'_LV.dat',
+        )
+    elif MODE.upper().beginswith('PARALLEL'):
+        if abs(PHASE) < 14.0 or abs(PHASE) > 16.0:
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='linear-horizontal',
+                nparticles=NPARTICLES,
+                bofile=out_name+'_LH.dat',
+            )
+         
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='linear-vertical',
+                nparticles=NPARTICLES,
+                bofile=out_name+'_LV.dat',
+            )
+        else:
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='cl',
+                nparticles=NPARTICLES,
+                bofile=out_name+'_CL.dat',
+            )
+ 
+            osr.calculate_spectrum(
+                obs=[0, 0, OBS],
+                energy_range_eV=[ESTART, ESTOP],
+                polarization='cr',
+                nparticles=NPARTICLES,
+                bofile=out_name+'_CR.dat',
+            )
+    else:
+        raise ValueError('MODE not recognized: ' + MODE)
 
 
