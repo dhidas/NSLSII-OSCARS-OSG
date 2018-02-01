@@ -80,7 +80,7 @@ print('Angle:', t_angle, 'PASSED' if t_angle < 1e-9 else 'FAILED')
 
 if int(Process) == 0:
     osr.set_new_particle(particle='ideal')
-    if MODE.upper().beginswith('ANTIPARALLEL'):
+    if MODE.upper().startswith('ANTIPARALLEL'):
         osr.calculate_spectrum(
             obs=[0, 0, OBS],
             energy_range_eV=[ESTART, ESTOP],
@@ -95,7 +95,7 @@ if int(Process) == 0:
             polarization='linear-vertical',
             bofile=out_name+'_LV.dat',
         )
-    elif MODE.upper().beginswith('PARALLEL'):
+    elif MODE.upper().startswith('PARALLEL'):
         if abs(PHASE) < 14.0 or abs(PHASE) > 16.0:
             osr.calculate_spectrum(
                 obs=[0, 0, OBS],
@@ -132,7 +132,7 @@ if int(Process) == 0:
 
 
 else:
-    if MODE.upper().beginswith('ANTIPARALLEL'):
+    if MODE.upper().startswith('ANTIPARALLEL'):
         osr.calculate_spectrum(
             obs=[0, 0, OBS],
             energy_range_eV=[ESTART, ESTOP],
@@ -148,7 +148,7 @@ else:
             nparticles=NPARTICLES,
             bofile=out_name+'_LV.dat',
         )
-    elif MODE.upper().beginswith('PARALLEL'):
+    elif MODE.upper().startswith('PARALLEL'):
         if abs(PHASE) < 14.0 or abs(PHASE) > 16.0:
             osr.calculate_spectrum(
                 obs=[0, 0, OBS],
